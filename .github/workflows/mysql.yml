@@ -24,7 +24,6 @@ jobs:
           - '9.7'
     steps:
       - uses: actions/checkout@v4
-      - uses: docker/setup-qemu-action@v3
       - uses: docker/setup-buildx-action@v3
         with:
           buildkitd-flags: --debug
@@ -37,7 +36,7 @@ jobs:
         with:
           context: ./mysql
           file: ./mysql/Dockerfile
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           build-args: MYSQL_VERSION=${{ matrix.tag }}
           push: true
           tags: ghcr.io/notyusta/image-yolks:mysql_${{ matrix.tag }}
